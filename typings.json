@@ -1,0 +1,6 @@
+{
+  "ambientDependencies": {
+    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#1c56e368e17bb28ca57577250624ca5bd561aa81",
+    "shelljs": "github:DefinitelyTyped/DefinitelyTyped/shelljs/shelljs.d.ts#ce14ae27a020194da3d35aa3468ca1e9e5296316"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "node-java-ipc",
+  "version": "1.0.0",
+  "description": "Node to Java Ipc using stdin, stdout and stderr, using a small and simple protocol allowing node to interact with java",
+  "main": "js/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && node src/js/test.js"
+  },
+  "author": "Abner Oliveira",
+  "license": "MIT",
+  "dependencies": {
+    "shelljs": "^0.6.0"
+  }
+}
