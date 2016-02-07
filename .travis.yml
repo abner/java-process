@@ -5,6 +5,10 @@ node_js:
   - "4.0"
   - "0.12"
 addons:
+  code_climate:
+    repo_token: f8ca9143-884f-4479-8502-5a99288ccd11
   apt:
     packages:
-    - openjdk-8-jre  
+    - openjdk-8-jre
+after_script:
+  - codeclimate-test-reporter < coverage/lcov.info
