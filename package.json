@@ -8,7 +8,8 @@
     "typings": "typings install",
     "build": "tsc",
     "test": "npm run build && istanbul cover --include-all-sources jasmine",
-    "build_test": "npm run build && npm run test"
+    "build_test": "npm run build && npm run test",
+    "covupdate": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "author": "Abner Oliveira",
   "license": "MIT",
@@ -16,6 +17,7 @@
     "shelljs": "^0.6.0"
   },
   "devDependencies": {
+    "coveralls": "^2.11.6",
     "istanbul": "^0.4.2",
     "jasmine": "^2.4.1",
     "typescript": "^1.7.5",
