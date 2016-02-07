@@ -5,11 +5,16 @@
   "main": "js/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "tsc && node src/js/test.js"
+    "test": "node src/js/test.js",
+    "build_test": "npm run build && npm run test"
   },
   "author": "Abner Oliveira",
   "license": "MIT",
   "dependencies": {
     "shelljs": "^0.6.0"
+  },
+  "devDependencies": {
+    "jasmine": "^2.4.1",
+    "typescript": "^1.7.5"
   }
 }
