@@ -24,6 +24,7 @@ export interface JavaProcessStatus {
     exitCode: number;
 
 }
+
 export class JavaProcess {
     DEFAULT_ENCODING = 'UTF-8';
     
@@ -312,4 +313,10 @@ export function spawn(jarPath: string, args?: string[]) {
 
     return child;
 
+}
+
+
+export function config( jarPath: string, args: string[], readyFn: Function): JavaProcess {
+    var jp = new JavaProcess(jarPath, args, readyFn);    
+    return jp;
 }

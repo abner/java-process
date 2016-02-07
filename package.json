@@ -2,7 +2,7 @@
   "name": "node-java-ipc",
   "version": "1.0.0",
   "description": "Node to Java Ipc using stdin, stdout and stderr, using a small and simple protocol allowing node to interact with java",
-  "main": "js/index.js",
+  "main": "src/js/index.js",
   "scripts": {
     "build": "tsc",
     "test": "istanbul cover --include-all-sources jasmine",

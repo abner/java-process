@@ -10,6 +10,12 @@ describe("JavaProcess", () => {
         var proc = new JavaProcess("java/EchoMessage.jar", null, readyCallback);
         return proc;
     }
+    
+    it("builds JavaProcess using config function", () => {
+       var proc = java_process.config("java/EchoMesage.jar", null, () => {
+           expect(proc instanceof JavaProcess).toBeTruthy();
+       });
+    });
 
     it("should show logging info if debug is ON", (done) => {
 

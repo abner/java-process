@@ -26,13 +26,10 @@ var java_process = require("./java_process");
 
 var jp = new java_process.config('someApp.jar', 'someArg=1', function() {
   jp.on('stdout', function(data) {
-    console.log("Some message java sent through System.out: ', String(data));
+    console.log("Some message java sent through System.out: ", String(data));
   });
   
   jp.writeDataToProcess('Some message to input to java process');
-  
-  
-
 });
 ```
 
