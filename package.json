@@ -4,8 +4,10 @@
   "description": "Node to Java Ipc using stdin, stdout and stderr, using a small and simple protocol allowing node to interact with java",
   "main": "src/js/index.js",
   "scripts": {
+    "postinstall": "npm run typings",
+    "typings": "typings install",
     "build": "tsc",
-    "test": "istanbul cover --include-all-sources jasmine",
+    "test": "npm run build && istanbul cover --include-all-sources jasmine",
     "build_test": "npm run build && npm run test"
   },
   "author": "Abner Oliveira",
