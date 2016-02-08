@@ -1,6 +1,9 @@
 # java-process
 
-[![Build Status](https://travis-ci.org/abner/java-process.svg?branch=master)](https://travis-ci.org/abner/java-process) [![Coverage Status](https://coveralls.io/repos/github/abner/java-process/badge.svg?branch=master)](https://coveralls.io/github/abner/java-process?branch=master)
+[![Build Status](https://travis-ci.org/abner/java-process.svg?branch=master)](https://travis-ci.org/abner/java-process) 
+[![Coverage Status](https://coveralls.io/repos/github/abner/java-process/badge.svg?branch=master)](https://coveralls.io/github/abner/java-process?branch=master) 
+[![Code Climate](https://codeclimate.com/github/abner/java-process/badges/gpa.svg)](https://codeclimate.com/github/abner/java-process) 
+[![Test Coverage](https://codeclimate.com/github/abner/java-process/badges/coverage.svg)](https://codeclimate.com/github/abner/java-process/coverage)
 
 A node module which provides a class JavaProcess which allow to spawn a java proccess within Node and interact with this java process
 through the stdin, stderr and stdout.
