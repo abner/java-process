@@ -1,3 +1,7 @@
 test:
   post:
     - cp -R coverage/ $CIRCLE_ARTIFACTS
+    
+general:
+  artifacts:
+    - coverage    
