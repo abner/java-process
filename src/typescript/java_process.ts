@@ -316,7 +316,7 @@ export function spawn(jarPath: string, args?: string[]) {
 }
 
 
-export function config( jarPath: string, args: string[], readyFn: Function): JavaProcess {
+export default function config( jarPath: string, args: string[], readyFn: Function): JavaProcess {
     var jp = new JavaProcess(jarPath, args, readyFn);    
     return jp;
 }

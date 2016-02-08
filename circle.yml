@@ -1,0 +1,3 @@
+test:
+  post:
+    - cp coverage/ $CIRCLE_ARTIFACTS
