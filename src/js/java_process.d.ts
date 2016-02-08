@@ -66,6 +66,7 @@ export declare class JavaProcess {
     onClose(code: number, signal: string): void;
     onDisconnect(): void;
     onExit(code?: number, signal?: string): void;
+    private buildPassThrough(streamTarget, callback);
     on(event: string, callback: Function): void;
     writeDataToProcess(data: string): void;
     spawn(): void;

@@ -168,10 +168,10 @@ export class JavaProcess {
     }
     
     private compareWithoutNewLinesAndLowerCase(value1: string, value2: string) {
-        if(value1 == null || value2 == null) {
+        if(value1 === null || value2 === null) {
             return true;
         }
-        return (trimNewLines(value1).toLowerCase() == trimNewLines(value2).toLowerCase());
+        return (trimNewLines(value1).toLowerCase() === trimNewLines(value2).toLowerCase());
     }
 
     onError(data: Buffer) {
@@ -199,11 +199,11 @@ export class JavaProcess {
     onExit(code?: number, signal?: string) {
         this.exited = true;
         this.normalExit = false;
-        if (code == 0) {
+        if (code === 0) {
             this.normalExit = true;
             this.exitCode = 0;
         }
-        else if (code == null) {
+        else if (code === null) {
             this.childUnaskedExit = true;
             this.exitSignal = signal;
         } else {
@@ -211,19 +211,22 @@ export class JavaProcess {
             this.exitSignal = code.toString();
         }
     }
+    
+    private buildPassThrough(streamTarget: stream.Readable, callback: Function) {
+         var pass = new stream.PassThrough();
+         streamTarget.pipe(pass);
+         pass.on("data", callback.bind(this));
+         return pass;
+    }
 
     public on(event: string, callback: Function) {
-        if (event == "stdout") {
-            var pass = new stream.PassThrough();
-            this.process.stdout.pipe(pass);
-            pass.on("data", callback.bind(this));
-            this.pipesOutput.push(pass);
+        if (event === "stdout") {
+            var passOut = this.buildPassThrough(this.process.stdout, callback);
+            this.pipesOutput.push(passOut);
         }
-        else if (event == "stderr") {
-            var pass = new stream.PassThrough();
-            this.process.stderr.pipe(pass);
-            pass.on("data", callback.bind(this));
-            this.pipesErr.push(pass);
+        else if (event === "stderr") {
+            var passErr = this.buildPassThrough(this.process.stderr, callback);
+            this.pipesErr.push(passErr);
         }
         else if (["close", "error", "exit", "disconnect"].indexOf(event) > -1) {
             this.process.on(event, callback.bind(this));
