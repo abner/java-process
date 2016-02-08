@@ -1,6 +1,7 @@
 test:
   post:
-    - cp -R coverage/ $CIRCLE_ARTIFACTS
+    - npm run codeclimate
+    - npm run covupdate 
     
 general:
   artifacts:
