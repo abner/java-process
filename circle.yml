@@ -1,8 +1,12 @@
+machine:
+  node:
+    version: 5.1.0
+    version: 4.0.0
+    version: 0.12.7
 test:
   post:
     - npm run codeclimate
     - npm run covupdate 
-    
 general:
   artifacts:
     - coverage    
