@@ -17,7 +17,7 @@ export interface JavaProcessStatus {
     normalExit: boolean;
     exitCode: number;
 }
-export declare class Process {
+export declare class JavaProcess {
     private jarPath;
     private args;
     private readyFn;
@@ -52,7 +52,7 @@ export declare class Process {
     private initTimeoutFn();
     start(readyCheck?: string, fnNotReady?: Function): void;
     setInitTimeout(timeout: number): void;
-    onReady(javaProcess: Process): void;
+    onReady(javaProcess: JavaProcess): void;
     isReady(): boolean;
     wasStarted(): boolean;
     setCustomDisconnect(disconnectFn: Function): void;
@@ -74,4 +74,4 @@ export declare class Process {
 }
 export declare function checkJava(): JavaInfo;
 export declare function spawn(jarPath: string, args?: string[]): child_process.ChildProcess;
-export default function config(jarPath: string, args: string[], readyFn: Function): Process;
+export default function config(jarPath: string, args: string[], readyFn: Function): JavaProcess;

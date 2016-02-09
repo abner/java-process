@@ -25,7 +25,7 @@ export interface JavaProcessStatus {
 
 }
 
-export class Process {
+export class JavaProcess {
     DEFAULT_ENCODING = 'UTF-8';
     
     public static get DEFAULT_INIT_TIMEOUT(): number    { return 5000; }
@@ -56,7 +56,7 @@ export class Process {
     private debugOn = false;
     private readyCheckString: string = null;
     
-    private initTimeout = Process.DEFAULT_INIT_TIMEOUT;
+    private initTimeout = JavaProcess.DEFAULT_INIT_TIMEOUT;
     
     private userNotReadyCallback: Function = null;
 
@@ -112,7 +112,7 @@ export class Process {
         this.initTimeout = timeout;
     }
 
-    onReady(javaProcess: Process): void {
+    onReady(javaProcess: JavaProcess): void {
         this.ready = true;
         this.readyFn.apply(this, [this]);
     }
@@ -319,7 +319,7 @@ export function spawn(jarPath: string, args?: string[]) {
 }
 
 
-export default function config( jarPath: string, args: string[], readyFn: Function): Process {
-    var jp = new Process(jarPath, args, readyFn);    
+export default function config( jarPath: string, args: string[], readyFn: Function): JavaProcess {
+    var jp = new JavaProcess(jarPath, args, readyFn);    
     return jp;
 }

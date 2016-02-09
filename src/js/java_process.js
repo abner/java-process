@@ -1,8 +1,8 @@
 var child_process = require("child_process");
 var shelljs = require("shelljs");
 var stream = require("stream");
-var Process = (function () {
-    function Process(jarPath, args, readyFn) {
+var JavaProcess = (function () {
+    function JavaProcess(jarPath, args, readyFn) {
         this.jarPath = jarPath;
         this.args = args;
         this.readyFn = readyFn;
@@ -22,16 +22,16 @@ var Process = (function () {
         this.customDisconnect = null;
         this.debugOn = false;
         this.readyCheckString = null;
-        this.initTimeout = Process.DEFAULT_INIT_TIMEOUT;
+        this.initTimeout = JavaProcess.DEFAULT_INIT_TIMEOUT;
         this.userNotReadyCallback = null;
         this.javaInfo = checkJava();
     }
-    Object.defineProperty(Process, "DEFAULT_INIT_TIMEOUT", {
+    Object.defineProperty(JavaProcess, "DEFAULT_INIT_TIMEOUT", {
         get: function () { return 5000; },
         enumerable: true,
         configurable: true
     });
-    Process.prototype.status = function () {
+    JavaProcess.prototype.status = function () {
         return {
             lastErrorFromStdErr: this.lastErrorFromStdErr,
             childUnaskedExit: this.childUnaskedExit,
@@ -44,7 +44,7 @@ var Process = (function () {
             exitCode: this.exitCode
         };
     };
-    Process.prototype.initTimeoutFn = function () {
+    JavaProcess.prototype.initTimeoutFn = function () {
         if (!this.ready) {
             if (this.userNotReadyCallback) {
                 this.userNotReadyCallback.apply(this);
@@ -58,7 +58,7 @@ var Process = (function () {
             }
         }
     };
-    Process.prototype.start = function (readyCheck, fnNotReady) {
+    JavaProcess.prototype.start = function (readyCheck, fnNotReady) {
         this.started = true;
         this.spawn();
         if (readyCheck) {
@@ -70,29 +70,29 @@ var Process = (function () {
             this.onReady(this);
         }
     };
-    Process.prototype.setInitTimeout = function (timeout) {
+    JavaProcess.prototype.setInitTimeout = function (timeout) {
         this.initTimeout = timeout;
     };
-    Process.prototype.onReady = function (javaProcess) {
+    JavaProcess.prototype.onReady = function (javaProcess) {
         this.ready = true;
         this.readyFn.apply(this, [this]);
     };
-    Process.prototype.isReady = function () {
+    JavaProcess.prototype.isReady = function () {
         return this.ready && !this.exited;
     };
-    Process.prototype.wasStarted = function () {
+    JavaProcess.prototype.wasStarted = function () {
         return this.started;
     };
-    Process.prototype.setCustomDisconnect = function (disconnectFn) {
+    JavaProcess.prototype.setCustomDisconnect = function (disconnectFn) {
         this.customDisconnect = disconnectFn;
     };
-    Process.prototype.setDebug = function (debug) {
+    JavaProcess.prototype.setDebug = function (debug) {
         this.debugOn = true;
     };
-    Process.prototype.kill = function (signal) {
+    JavaProcess.prototype.kill = function (signal) {
         this.process.kill(signal ? signal : 'SIGTERM');
     };
-    Process.prototype.disconnect = function () {
+    JavaProcess.prototype.disconnect = function () {
         this.debug("Disconnect called on JavaProcess instance");
         this.debug("started: ", this.started);
         this.debug("closed: ", this.closed);
@@ -105,30 +105,30 @@ var Process = (function () {
             }
         }
     };
-    Process.prototype.onDataOnStdErr = function (data) {
+    JavaProcess.prototype.onDataOnStdErr = function (data) {
         this.errorsFromStdErr++;
         this.lastErrorFromStdErr = String(data);
     };
-    Process.prototype.onDataOnStdOut = function (data) {
+    JavaProcess.prototype.onDataOnStdOut = function (data) {
         var msg = String(data);
         this.debug("MSG RECEIVED FROM STDOUT", msg);
         if (!this.ready && this.readyCheckString && this.compareWithoutNewLinesAndLowerCase(this.readyCheckString, msg)) {
             this.onReady(this);
         }
     };
-    Process.prototype.compareWithoutNewLinesAndLowerCase = function (value1, value2) {
+    JavaProcess.prototype.compareWithoutNewLinesAndLowerCase = function (value1, value2) {
         if (value1 === null || value2 === null) {
             return true;
         }
         return (trimNewLines(value1).toLowerCase() === trimNewLines(value2).toLowerCase());
     };
-    Process.prototype.onError = function (data) {
+    JavaProcess.prototype.onError = function (data) {
         this.debug("ERROR EVENT", String(data));
         this.procErrorOcurred = true;
         this.closed = true;
         this.lastProcError = String(data);
     };
-    Process.prototype.onClose = function (code, signal) {
+    JavaProcess.prototype.onClose = function (code, signal) {
         this.debug("CLOSE EVENT", code, signal);
         this.closed = true;
         this.closeData = {
@@ -136,10 +136,10 @@ var Process = (function () {
             signal: signal
         };
     };
-    Process.prototype.onDisconnect = function () {
+    JavaProcess.prototype.onDisconnect = function () {
         this.closed = true;
     };
-    Process.prototype.onExit = function (code, signal) {
+    JavaProcess.prototype.onExit = function (code, signal) {
         this.exited = true;
         this.normalExit = false;
         if (code === 0) {
@@ -155,13 +155,13 @@ var Process = (function () {
             this.exitSignal = code.toString();
         }
     };
-    Process.prototype.buildPassThrough = function (streamTarget, callback) {
+    JavaProcess.prototype.buildPassThrough = function (streamTarget, callback) {
         var pass = new stream.PassThrough();
         streamTarget.pipe(pass);
         pass.on("data", callback.bind(this));
         return pass;
     };
-    Process.prototype.on = function (event, callback) {
+    JavaProcess.prototype.on = function (event, callback) {
         if (event === "stdout") {
             var passOut = this.buildPassThrough(this.process.stdout, callback);
             this.pipesOutput.push(passOut);
@@ -174,7 +174,7 @@ var Process = (function () {
             this.process.on(event, callback.bind(this));
         }
     };
-    Process.prototype.writeDataToProcess = function (data) {
+    JavaProcess.prototype.writeDataToProcess = function (data) {
         this.debug("ASKED FOR WRITE TO PROCESS STDIN");
         if (this.ready) {
             this.msgSent++;
@@ -182,7 +182,7 @@ var Process = (function () {
             this.process.stdin.write(data + "\n");
         }
     };
-    Process.prototype.spawn = function () {
+    JavaProcess.prototype.spawn = function () {
         this.debug("THIS FROM SPAWN ", this);
         this.process = spawn(this.jarPath, this.args);
         this.process.on("disconnect", this.onDisconnect.bind(this));
@@ -191,7 +191,7 @@ var Process = (function () {
         this.process.on("close", this.onClose.bind(this));
         this.on("stdout", this.onDataOnStdOut.bind(this));
     };
-    Process.prototype.debug = function (message) {
+    JavaProcess.prototype.debug = function (message) {
         var optionalParams = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             optionalParams[_i - 1] = arguments[_i];
@@ -200,9 +200,9 @@ var Process = (function () {
             console.log(message, optionalParams);
         }
     };
-    return Process;
+    return JavaProcess;
 })();
-exports.Process = Process;
+exports.JavaProcess = JavaProcess;
 function trimNewLines(input) {
     if (input) {
         return input.replace(/(\r\n|\n|\r)/gm, "");
@@ -243,9 +243,9 @@ function spawn(jarPath, args) {
 }
 exports.spawn = spawn;
 function config(jarPath, args, readyFn) {
-    var jp = new Process(jarPath, args, readyFn);
+    var jp = new JavaProcess(jarPath, args, readyFn);
     return jp;
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = config;
-//# sourceMappingURL=process.js.map
+//# sourceMappingURL=java_process.js.map
