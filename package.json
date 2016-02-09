@@ -1,11 +1,11 @@
 {
   "name": "java-process",
-  "version": "0.1.0-1",
+  "version": "0.1.0-2",
   "description": "Node to Java Ipc using stdin, stdout and stderr, using a small and simple protocol allowing node to interact with java",
   "main": "src/js/index.js",
   "typescript": {
     "main": "src/ts/index.ts",
-    "definition": "/src/js/java_process.d.ts"
+    "definition": "src/js/java_process.d.ts"
   },
   "scripts": {
     "preinstall": "npm install autodts",
