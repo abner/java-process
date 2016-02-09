@@ -25,7 +25,7 @@ export interface JavaProcessStatus {
 
 }
 
-export class JavaProcess {
+export class Process {
     DEFAULT_ENCODING = 'UTF-8';
     
     public static get DEFAULT_INIT_TIMEOUT(): number    { return 5000; }
@@ -56,7 +56,7 @@ export class JavaProcess {
     private debugOn = false;
     private readyCheckString: string = null;
     
-    private initTimeout = JavaProcess.DEFAULT_INIT_TIMEOUT;
+    private initTimeout = Process.DEFAULT_INIT_TIMEOUT;
     
     private userNotReadyCallback: Function = null;
 
@@ -112,7 +112,7 @@ export class JavaProcess {
         this.initTimeout = timeout;
     }
 
-    onReady(javaProcess: JavaProcess): void {
+    onReady(javaProcess: Process): void {
         this.ready = true;
         this.readyFn.apply(this, [this]);
     }
@@ -152,12 +152,12 @@ export class JavaProcess {
         }
     }
 
-    onDataOnStdErr(data: Buffer) {
+    onDataOnStdErr(data: any) {
         this.errorsFromStdErr++;
         this.lastErrorFromStdErr = String(data);
     }
 
-    onDataOnStdOut(data: Buffer) {
+    onDataOnStdOut(data: any) {
         var msg: string = String(data);
         this.debug("MSG RECEIVED FROM STDOUT", msg);
 
@@ -174,7 +174,7 @@ export class JavaProcess {
         return (trimNewLines(value1).toLowerCase() === trimNewLines(value2).toLowerCase());
     }
 
-    onError(data: Buffer) {
+    onError(data: any) {
         this.debug("ERROR EVENT", String(data));
         this.procErrorOcurred = true;
         this.closed = true;
@@ -319,7 +319,7 @@ export function spawn(jarPath: string, args?: string[]) {
 }
 
 
-export default function config( jarPath: string, args: string[], readyFn: Function): JavaProcess {
-    var jp = new JavaProcess(jarPath, args, readyFn);    
+export default function config( jarPath: string, args: string[], readyFn: Function): Process {
+    var jp = new Process(jarPath, args, readyFn);    
     return jp;
 }

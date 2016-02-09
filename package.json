@@ -3,8 +3,14 @@
   "version": "0.0.3",
   "description": "Node to Java Ipc using stdin, stdout and stderr, using a small and simple protocol allowing node to interact with java",
   "main": "src/js/index.js",
+  "typescript": {
+    "main": "src/js/java_process.js",
+    "definition": "index.d.ts"
+  },
   "scripts": {
-    "postinstall": "npm run typings",
+    "preinstall": "npm install autodts",
+    "postinstall": "npm run typings && autodts link",
+    "prepublish": "tsc && autodts generate",
     "typings": "typings install",
     "build": "tsc",
     "jasmine": "jasmine",
@@ -20,6 +26,8 @@
     "shelljs": "^0.6.0"
   },
   "devDependencies": {
+    "@lib/autodts-generator": "0.0.2",
+    "autodts": "0.0.6",
     "codeclimate-test-reporter": "^0.3.1",
     "codecov": "^1.0.1",
     "coveralls": "^2.11.6",
@@ -27,6 +35,7 @@
     "jasmine": "^2.4.1",
     "jasmine-node": "^1.14.5",
     "remap-istanbul": "^0.5.1",
+    "ts-node": "^0.5.5",
     "typescript": "^1.7.5",
     "typings": "^0.6.6"
   }

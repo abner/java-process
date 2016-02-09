@@ -1,15 +1,15 @@
-
-import java_process from "./java_process";
-import {JavaProcess, JavaProcessStatus, ChildProcessExtended } from "./java_process";
+import java_process from "../src/java_process/java_process";
+import {JavaProcess, JavaProcessStatus, ChildProcessExtended } from "../src/java_process/java_process";
 
 (<any>jasmine.getEnv()).defaultTimeoutInterval = 15000;
 
 describe("JavaProcess", () => {
-
+   
     function setupJavaProcess(readyCallback: () => void) {
         var proc = new JavaProcess("java/EchoMessage.jar", null, readyCallback);
         return proc;
     }
+    
     
     it("builds JavaProcess using config function", () => {
        var proc = java_process("java/EchoMesage.jar", null, () => {

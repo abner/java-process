@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "rootDir": "src/typescript",
-    "outDir": "src/js",
+    "rootDir": "src/",
+    "outDir": "src/",
     "module": "commonjs",
     "declaration": true,
     "noImplicitAny": true,
@@ -10,7 +10,10 @@
     "moduleResolution": "node",
     "sourceMap": true
   },
+  
   "exclude": [
+      "src/**/*.d.ts",
+      "spec",
       "node_modules",
       "typings/browser.d.ts",
       "typings/browser"
