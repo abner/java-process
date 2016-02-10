@@ -1,11 +1,10 @@
 {
   "name": "java_process",
-  "version": "0.1.0-6",
+  "version": "0.1.0-7",
   "description": "Node to Java Ipc using stdin, stdout and stderr, using a small and simple protocol allowing node to interact with java",
   "main": "dist/java_process.js",
   "typescript": {
-    "main": "src/java_process.ts",
-    "definition": "src/java_process/java_process.d.ts"
+    "main": "src/java_process.ts"
   },
   "scripts": {
     "build": "tsc",
@@ -22,8 +21,6 @@
     "shelljs": "^0.6.0"
   },
   "devDependencies": {
-    "@lib/autodts-generator": "0.0.2",
-    "autodts": "0.0.6",
     "codeclimate-test-reporter": "^0.3.1",
     "codecov": "^1.0.1",
     "coveralls": "^2.11.6",
