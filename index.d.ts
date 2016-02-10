@@ -1,4 +1,6 @@
+/// <reference path="index.ref.d.ts" />
 declare module 'java_process/java_process' {
+	/// <reference path="../../typings/main/ambient/node/node.d.ts" />
 	import * as child_process from "child_process";
 	export interface JavaInfo {
 	    location: string;

@@ -1,3 +1,4 @@
+/// <reference path="../../typings/main/ambient/node/node.d.ts" />
 import * as child_process from "child_process";
 export interface JavaInfo {
     location: string;
