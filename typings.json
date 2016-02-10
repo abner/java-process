@@ -1,7 +1,8 @@
 {
-  "ambientDependencies": {
-    "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#777e7d1b1d6c6250d6fba52ea9e6841f7a6b5e9d",
-    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#1c56e368e17bb28ca57577250624ca5bd561aa81",
-    "shelljs": "github:DefinitelyTyped/DefinitelyTyped/shelljs/shelljs.d.ts#ce14ae27a020194da3d35aa3468ca1e9e5296316"
-  }
+    "main": "java_process.d.ts",
+    "ambientDependencies": {
+        "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#777e7d1b1d6c6250d6fba52ea9e6841f7a6b5e9d",
+        "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#1c56e368e17bb28ca57577250624ca5bd561aa81",
+        "shelljs": "github:DefinitelyTyped/DefinitelyTyped/shelljs/shelljs.d.ts#ce14ae27a020194da3d35aa3468ca1e9e5296316"
+    }
 }
