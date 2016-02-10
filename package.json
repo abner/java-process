@@ -1,6 +1,6 @@
 {
   "name": "java_process",
-  "version": "0.1.0-3",
+  "version": "0.1.0-4",
   "description": "Node to Java Ipc using stdin, stdout and stderr, using a small and simple protocol allowing node to interact with java",
   "main": "dist/java_process.js",
   "typescript": {
