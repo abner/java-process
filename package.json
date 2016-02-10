@@ -1,17 +1,13 @@
 {
   "name": "java_process",
-  "version": "0.1.0-5",
+  "version": "0.1.0-6",
   "description": "Node to Java Ipc using stdin, stdout and stderr, using a small and simple protocol allowing node to interact with java",
   "main": "dist/java_process.js",
   "typescript": {
     "main": "src/java_process.ts",
-    "definition": "index.d.ts"
+    "definition": "src/java_process/java_process.d.ts"
   },
   "scripts": {
-    "postinstall": "autodts link",
-    "prepublish": "tsc && autodts generate",
-    "preinstall": "typings install && npm install autodts",
-    "typings": "typings install",
     "build": "tsc",
     "jasmine": "jasmine",
     "test": "npm run build && istanbul cover --include-all-sources jasmine  && npm run remap-cov",
