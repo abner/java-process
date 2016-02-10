@@ -1,6 +1,6 @@
 declare var jasmine: any;
 
-import java_process from "./java_process";
+import {default as java_process} from "./java_process";
 import {JavaProcess, JavaProcessStatus, ChildProcessExtended } from "./java_process";
 
 (<any>jasmine.getEnv()).defaultTimeoutInterval = 15000;
